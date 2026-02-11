@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertBookingSchema, type InsertBooking } from "@shared/schema";
-import { useCreateBooking } from "@/hooks/use-bookings";
 import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { MessageCircle, Loader2 } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -20,7 +19,6 @@ interface BookingFormProps {
 export function BookingForm({ selectedPackage }: BookingFormProps) {
   const { t } = useI18n();
   const { toast } = useToast();
-  const mutation = useCreateBooking();
 
   const form = useForm<InsertBooking>({
     resolver: zodResolver(insertBookingSchema),
@@ -42,30 +40,22 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
   }, [selectedPackage, form]);
 
   const onSubmit = (data: InsertBooking) => {
-    mutation.mutate(data, {
-      onSuccess: () => {
-        toast({
-          title: t("book.success"),
-          description: t("book.redirect"),
-        });
-
-        // Construct WhatsApp Message
-        const message = `Hello Neat PC! I want to book a service.%0A%0A*Name:* ${data.fullName}%0A*Phone:* ${data.phoneNumber}%0A*Package:* ${data.packageType}%0A*Address:* ${data.address}%0A*Date:* ${data.preferredDate}%0A*Notes:* ${data.notes || "None"}`;
-        
-        // Wait a moment for toast then redirect
-        setTimeout(() => {
-          window.open(`https://wa.me/8801632425636?text=${message}`, "_blank");
-          form.reset();
-        }, 1500);
-      },
-      onError: (error) => {
-        toast({
-          title: "Error",
-          description: error.message,
-          variant: "destructive",
-        });
-      }
+    toast({
+      title: t("book.success"),
+      description: t("book.redirect"),
     });
+
+    // Construct WhatsApp Message
+    const message = `Hello Neat PC! I want to book a service.\n\n*Name:* ${data.fullName}\n*Phone:* ${data.phoneNumber}\n*Package:* ${data.packageType}\n*Address:* ${data.address}\n*Date:* ${data.preferredDate}\n*Notes:* ${data.notes || "None"}`;
+    
+    // Encode and redirect
+    const whatsappUrl = `https://wa.me/8801632425636?text=${encodeURIComponent(message)}`;
+    
+    // Wait a moment for toast then redirect
+    setTimeout(() => {
+      window.open(whatsappUrl, "_blank");
+      form.reset();
+    }, 1500);
   };
 
   const openWhatsAppDirect = () => {
@@ -188,13 +178,8 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
                 <Button 
                   type="submit" 
                   className="w-full h-14 text-lg font-bold bg-gradient-to-r from-primary to-primary/90 hover:to-primary shadow-lg shadow-primary/25 rounded-xl"
-                  disabled={mutation.isPending}
                 >
-                  {mutation.isPending ? (
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  ) : (
-                    t("book.submit")
-                  )}
+                  {t("book.submit")}
                 </Button>
               </form>
             </Form>

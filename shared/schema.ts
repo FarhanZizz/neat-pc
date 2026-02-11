@@ -1,22 +1,12 @@
-import { pgTable, text, serial, timestamp, date } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const bookings = pgTable("bookings", {
-  id: serial("id").primaryKey(),
-  fullName: text("full_name").notNull(),
-  phoneNumber: text("phone_number").notNull(),
-  address: text("address").notNull(),
-  preferredDate: text("preferred_date").notNull(), // storing as string for simplicity with varied date formats or just YYYY-MM-DD
-  packageType: text("package_type").notNull(), // Basic, Advanced, Ultimate
-  notes: text("notes"),
-  createdAt: timestamp("created_at").defaultNow(),
+export const insertBookingSchema = z.object({
+  fullName: z.string().min(1, "Full name is required"),
+  phoneNumber: z.string().min(1, "Phone number is required"),
+  address: z.string().min(1, "Address is required"),
+  preferredDate: z.string().min(1, "Preferred date is required"),
+  packageType: z.string().min(1, "Package type is required"),
+  notes: z.string().optional(),
 });
 
-export const insertBookingSchema = createInsertSchema(bookings).omit({
-  id: true,
-  createdAt: true,
-});
-
-export type Booking = typeof bookings.$inferSelect;
 export type InsertBooking = z.infer<typeof insertBookingSchema>;
