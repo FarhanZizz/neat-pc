@@ -185,7 +185,7 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
             </Form>
             
             <div className="mt-8 text-center border-t pt-6">
-               <Button variant="link" onClick={openWhatsAppDirect} className="text-green-600">
+               <Button variant="ghost" onClick={openWhatsAppDirect} className="text-green-600">
                   <MessageCircle className="w-4 h-4 mr-2" />
                   {t("book.or_whatsapp")}
                </Button>
