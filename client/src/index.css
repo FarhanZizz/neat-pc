@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-display: 'Outfit', 'Hind Siliguri', sans-serif;
-  --font-body: 'Inter', 'Hind Siliguri', sans-serif;
+  --font-display: "Outfit", "Hind Siliguri", sans-serif;
+  --font-body: "Inter", "Hind Siliguri", sans-serif;
 
   /* Clean Teal/Tech Theme */
   --background: 210 40% 98%;
@@ -40,7 +40,12 @@
     font-family: var(--font-body);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     @apply font-bold tracking-tight;
   }
@@ -53,7 +58,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.hero-gradient {
+/* .hero-gradient {
   background: radial-gradient(circle at top right, rgba(45, 212, 191, 0.15), transparent 40%),
               radial-gradient(circle at bottom left, rgba(255, 180, 50, 0.1), transparent 40%);
-}
+} */

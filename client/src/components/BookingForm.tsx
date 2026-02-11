@@ -5,8 +5,21 @@ import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { MessageCircle, Info } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -34,8 +47,8 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
       address: "",
       preferredDate: "",
       packageType: "",
-      notes: ""
-    }
+      notes: "",
+    },
   });
 
   // Update form when selectedPackage prop changes
@@ -52,11 +65,19 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
     });
 
     // Construct WhatsApp Message
-    const message = `Hello Neat PC! I want to book a service.\n\n*Name:* ${data.fullName}\n*Phone:* ${data.phoneNumber}\n*Package:* ${data.packageType}\n*Address:* ${data.address}\n*Date:* ${data.preferredDate}\n*Notes:* ${data.notes || "None"}`;
-    
+    const message = `Hello Neat PC! I want to book a service.\n\n*Name:* ${
+      data.fullName
+    }\n*Phone:* ${data.phoneNumber}\n*Package:* ${
+      data.packageType
+    }\n*Address:* ${data.address}\n*Date:* ${data.preferredDate}\n*Notes:* ${
+      data.notes || "None"
+    }`;
+
     // Encode and redirect
-    const whatsappUrl = `https://wa.me/8801632425636?text=${encodeURIComponent(message)}`;
-    
+    const whatsappUrl = `https://wa.me/8801632425636?text=${encodeURIComponent(
+      message
+    )}`;
+
     // Wait a moment for toast then redirect
     setTimeout(() => {
       window.open(whatsappUrl, "_blank");
@@ -72,14 +93,18 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
     <section id="book" className="py-24 px-4 bg-secondary/30">
       <div className="max-w-2xl mx-auto">
         <Card className="shadow-2xl border-0 overflow-hidden">
-          <div className="h-2 bg-gradient-to-r from-primary to-accent"></div>
+          <div className="h-2 bg-primary"></div>
           <CardHeader className="bg-white pb-8">
-            <CardTitle className="text-3xl text-center">{t("book.title")}</CardTitle>
+            <CardTitle className="text-3xl text-center">
+              {t("book.title")}
+            </CardTitle>
           </CardHeader>
           <CardContent className="bg-white pt-2">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField
                     control={form.control}
@@ -88,7 +113,11 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
                       <FormItem>
                         <FormLabel>{t("book.name")}</FormLabel>
                         <FormControl>
-                          <Input className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all" placeholder="John Doe" {...field} />
+                          <Input
+                            className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all"
+                            placeholder="John Doe"
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -102,7 +131,11 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
                       <FormItem>
                         <FormLabel>{t("book.phone")}</FormLabel>
                         <FormControl>
-                          <Input className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all" placeholder="017..." {...field} />
+                          <Input
+                            className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all"
+                            placeholder="017..."
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -117,7 +150,11 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
                     <FormItem>
                       <FormLabel>{t("book.address")}</FormLabel>
                       <FormControl>
-                        <Input className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all" placeholder="Chattogram" {...field} />
+                        <Input
+                          className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all"
+                          placeholder="Chattogram"
+                          {...field}
+                        />
                       </FormControl>
                       <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
                         <Info className="w-3 h-3 text-primary" />
@@ -135,16 +172,25 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>{t("book.package")}</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
+                        <Select
+                          onValueChange={field.onChange}
+                          value={field.value}
+                        >
                           <FormControl>
                             <SelectTrigger className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary">
                               <SelectValue placeholder={t("book.package")} />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="Basic">Basic Clean (৳499)</SelectItem>
-                            <SelectItem value="Advanced">Advanced Care (৳699)</SelectItem>
-                            <SelectItem value="Ultimate">Ultimate Detox (৳999)</SelectItem>
+                            <SelectItem value="Basic">
+                              Basic Clean (৳499)
+                            </SelectItem>
+                            <SelectItem value="Advanced">
+                              Advanced Care (৳699)
+                            </SelectItem>
+                            <SelectItem value="Ultimate">
+                              Ultimate Detox (৳999)
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -159,11 +205,11 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
                       <FormItem>
                         <FormLabel>{t("book.date")}</FormLabel>
                         <FormControl>
-                          <Input 
-                            type="date" 
+                          <Input
+                            type="date"
                             min={minDate}
-                            className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all" 
-                            {...field} 
+                            className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all"
+                            {...field}
                           />
                         </FormControl>
                         <FormMessage />
@@ -179,27 +225,35 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
                     <FormItem>
                       <FormLabel>{t("book.notes")}</FormLabel>
                       <FormControl>
-                        <Textarea className="min-h-[100px] bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all" placeholder="..." {...field} />
+                        <Textarea
+                          className="min-h-[100px] bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all"
+                          placeholder="..."
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="w-full h-14 text-lg font-bold bg-gradient-to-r from-primary to-primary/90 hover:to-primary shadow-lg shadow-primary/25 rounded-xl"
                 >
                   {t("book.submit")}
                 </Button>
               </form>
             </Form>
-            
+
             <div className="mt-8 text-center border-t pt-6">
-               <Button variant="ghost" onClick={openWhatsAppDirect} className="text-green-600">
-                  <MessageCircle className="w-4 h-4 mr-2" />
-                  {t("book.or_whatsapp")}
-               </Button>
+              <Button
+                variant="ghost"
+                onClick={openWhatsAppDirect}
+                className="text-green-600"
+              >
+                <MessageCircle className="w-4 h-4 mr-2" />
+                {t("book.or_whatsapp")}
+              </Button>
             </div>
           </CardContent>
         </Card>
