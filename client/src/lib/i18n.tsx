@@ -18,6 +18,7 @@ const translations: Record<string, Record<Language, string>> = {
   // Hero
   "hero.headline": { en: "Premium PC Cleaning, At Your Doorstep", bn: "আপনার পিসির প্রিমিয়াম ক্লিনিং, আপনার বাসায়" },
   "hero.subhead": { en: "No more hassle of taking your PC to a shop. We come to you.", bn: "আর নয় শপে যাওয়ার ঝামেলা। আমরা আসি আপনার কাছে।" },
+  "hero.serving": { en: "Currently serving Chattogram, Bangladesh", bn: "বর্তমানে চট্টগ্রাম, বাংলাদেশে সার্ভিস প্রদান করা হচ্ছে" },
   "hero.cta_packages": { en: "View Packages", bn: "প্যাকেজ দেখুন" },
   "hero.cta_whatsapp": { en: "Book on WhatsApp", bn: "হোয়াটসঅ্যাপে বুক করুন" },
 
@@ -62,6 +63,7 @@ const translations: Record<string, Record<Language, string>> = {
   "book.name": { en: "Full Name", bn: "আপনার নাম" },
   "book.phone": { en: "Phone Number", bn: "ফোন নম্বর" },
   "book.address": { en: "Full Address", bn: "ঠিকানা" },
+  "book.address_helper": { en: "We currently only serve areas within Chattogram", bn: "আমরা বর্তমানে শুধুমাত্র চট্টগ্রামে সার্ভিস প্রদান করি" },
   "book.date": { en: "Preferred Date", bn: "পছন্দের তারিখ" },
   "book.package": { en: "Select Package", bn: "প্যাকেজ নির্বাচন করুন" },
   "book.notes": { en: "Any specific issues? (Optional)", bn: "বিশেষ কোনো সমস্যা? (অপশনাল)" },

@@ -29,10 +29,10 @@ export function Footer() {
             <Phone className="w-5 h-5" />
             <span>01632-425636</span>
           </div>
-          <div className="flex items-center gap-3 text-background/80">
+          <a href="mailto:neatpc.bd@gmail.com" className="flex items-center gap-3 text-background/80 hover:text-primary-foreground transition-colors">
             <Mail className="w-5 h-5" />
-            <span>support@neatpc.com</span>
-          </div>
+            <span>neatpc.bd@gmail.com</span>
+          </a>
         </div>
 
         {/* Copyright */}

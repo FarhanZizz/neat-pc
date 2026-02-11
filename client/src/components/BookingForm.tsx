@@ -8,8 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { MessageCircle } from "lucide-react";
-import { useEffect } from "react";
+import { MessageCircle, Info } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface BookingFormProps {
@@ -19,6 +19,12 @@ interface BookingFormProps {
 export function BookingForm({ selectedPackage }: BookingFormProps) {
   const { t } = useI18n();
   const { toast } = useToast();
+  const [minDate, setMinDate] = useState("");
+
+  useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    setMinDate(today);
+  }, []);
 
   const form = useForm<InsertBooking>({
     resolver: zodResolver(insertBookingSchema),
@@ -111,8 +117,12 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
                     <FormItem>
                       <FormLabel>{t("book.address")}</FormLabel>
                       <FormControl>
-                        <Input className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all" placeholder="House 10, Road 5, Uttara" {...field} />
+                        <Input className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all" placeholder="Chattogram" {...field} />
                       </FormControl>
+                      <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
+                        <Info className="w-3 h-3 text-primary" />
+                        {t("book.address_helper")}
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -151,6 +161,7 @@ export function BookingForm({ selectedPackage }: BookingFormProps) {
                         <FormControl>
                           <Input 
                             type="date" 
+                            min={minDate}
                             className="h-12 bg-secondary/30 border-transparent focus:bg-white focus:border-primary transition-all" 
                             {...field} 
                           />
