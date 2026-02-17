@@ -1,4 +1,4 @@
-# Neat PC - Service Website
+# Neat PC - Service Website (Vibecoded using Replit)
 
 ## Overview
 
